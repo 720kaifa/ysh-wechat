@@ -12,7 +12,7 @@ import java.util.Map;
 /**
  * 联连服务号消息路由器
  *
- * Created by yangshanghang on 2017/12/21.
+ * Created by yangshanghang on 2017/12/21...
  */
 @Component
 public class LpspMessageRouter extends MessageRouter {
