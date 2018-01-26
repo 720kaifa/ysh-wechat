@@ -1,13 +1,14 @@
 package com.ysh.wechat.wxsdk.menu;
 
-
 import com.ysh.wechat.common.constant.ConfigConstant;
 import com.ysh.wechat.common.util.JSONUtils;
 import com.ysh.wechat.wxsdk.menu.bean.Button;
 import com.ysh.wechat.wxsdk.menu.bean.ComplexButton;
 import com.ysh.wechat.wxsdk.menu.bean.Menu;
 import com.ysh.wechat.wxsdk.menu.bean.ViewButton;
-
+import org.junit.Test;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 
 /**
  * 描述: 自定义菜单设置 测试类 .<br>
@@ -15,15 +16,12 @@ import com.ysh.wechat.wxsdk.menu.bean.ViewButton;
  * @author YangShangHang
  * @date 2017/12/26
  */
-public class MenuManagerTest {
+@ContextConfiguration(locations = {"classpath:entry/dev/spring-entry.xml"})
+public class MenuManagerTest extends AbstractJUnit4SpringContextTests {
 
-    /**
-     * 自定义菜单设置
-     *
-     * @param args
-     * @throws Exception
-     */
-    public static void main(String[] args) throws Exception {
+    @Test
+//    @Ignore
+    public void initMenuTest() throws Exception{
         // 菜单一中的二级菜单
         ViewButton btn11 = new ViewButton();
         btn11.setName("内网穿透");
@@ -36,8 +34,8 @@ public class MenuManagerTest {
 
         // 菜单二中的二级菜单
         ViewButton btn21 = new ViewButton();
-        btn11.setName("echarts");
-        btn11.setUrl("http://echarts.baidu.com/");
+        btn21.setName("图表EC");
+        btn21.setUrl("http://echarts.baidu.com/");
 
         ComplexButton btn2 = new ComplexButton();
         btn2.setName("菜单二");
