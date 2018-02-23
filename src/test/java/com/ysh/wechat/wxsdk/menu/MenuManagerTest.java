@@ -2,10 +2,7 @@ package com.ysh.wechat.wxsdk.menu;
 
 import com.ysh.wechat.common.constant.ConfigConstant;
 import com.ysh.wechat.common.util.JSONUtils;
-import com.ysh.wechat.wxsdk.menu.bean.Button;
-import com.ysh.wechat.wxsdk.menu.bean.ComplexButton;
-import com.ysh.wechat.wxsdk.menu.bean.Menu;
-import com.ysh.wechat.wxsdk.menu.bean.ViewButton;
+import com.ysh.wechat.wxsdk.menu.bean.*;
 import org.junit.Test;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
@@ -27,9 +24,13 @@ public class MenuManagerTest extends AbstractJUnit4SpringContextTests {
         btn11.setName("内网穿透");
         btn11.setUrl("https://natapp.cn/");
 
+        ClickButton btn12 = new ClickButton();
+        btn12.setName("测试回复");
+        btn12.setKey("test_key");
+
         ComplexButton btn1 = new ComplexButton();
         btn1.setName("菜单一");
-        btn1.setSub_button(new Button[]{btn11});
+        btn1.setSub_button(new Button[]{btn11, btn12});
 
 
         // 菜单二中的二级菜单
