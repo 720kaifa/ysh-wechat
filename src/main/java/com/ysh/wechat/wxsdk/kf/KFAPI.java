@@ -5,10 +5,7 @@ import com.ysh.wechat.wxsdk.base.BaseAPI;
 import com.ysh.wechat.wxsdk.base.BaseResult;
 import com.ysh.wechat.wxsdk.client.HttpClientExecutor;
 import com.ysh.wechat.wxsdk.common.utils.JSONUtils;
-import com.ysh.wechat.wxsdk.kf.bean.KFList;
-import com.ysh.wechat.wxsdk.kf.bean.KFSession;
-import com.ysh.wechat.wxsdk.kf.bean.KFSessionStatus;
-import com.ysh.wechat.wxsdk.kf.bean.KFTextMessage;
+import com.ysh.wechat.wxsdk.kf.bean.*;
 import com.ysh.wechat.wxsdk.token.TokenManager;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.client.methods.RequestBuilder;
@@ -62,6 +59,48 @@ public class KFAPI extends BaseAPI{
      * @throws Exception 异常
      */
     public static BaseResult sendKFTextMessage(String access_token, KFTextMessage message) throws Exception {
+        HttpUriRequest httpUriRequest = RequestBuilder.post()
+                .setHeader(jsonHeader)
+                .setUri(BASE_URI + "/cgi-bin/message/custom/send")
+                .addParameter(PARAM_ACCESS_TOKEN, access_token)
+                .setEntity(new StringEntity(JSONUtils.toJSONString(message), Charset.forName("utf-8")))
+                .build();
+        return HttpClientExecutor.executeJsonResult(httpUriRequest, BaseResult.class);
+    }
+
+    /**
+     * 发送客服图片消息
+     *
+     * @param openId  微信用户openId
+     * @param media_id 图片媒体id
+     * @throws Exception 异常
+     */
+    public static void sendKFImageMessage(String openId, String media_id) throws Exception {
+        // 1.生成客服图片消息
+        KFImageMessage imageMessage = new KFImageMessage(openId, media_id);
+
+        // 2.执行发送
+        try {
+            BaseResult baseResult = sendKFImageMessage(TokenManager
+                    .getToken(ConfigConstant.APP_ID_WECHAT, ConfigConstant.APP_SECRET_WECHAT)
+                    .getAccess_token(), imageMessage);
+            if (!baseResult.isSuccess()) {
+                logger.error("发送客服图片消息失败：{} - {}", baseResult.getErrcode(), baseResult.getErrmsg());
+            }
+        } catch (Exception e) {
+            logger.error("发送客服图片消息异常：", e);
+        }
+    }
+
+    /**
+     * 发送客服图片消息
+     *
+     * @param access_token 接口调用access_token
+     * @param message      消息
+     * @return 调用结果
+     * @throws Exception 异常
+     */
+    public static BaseResult sendKFImageMessage(String access_token, KFImageMessage message) throws Exception {
         HttpUriRequest httpUriRequest = RequestBuilder.post()
                 .setHeader(jsonHeader)
                 .setUri(BASE_URI + "/cgi-bin/message/custom/send")
