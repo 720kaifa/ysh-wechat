@@ -1,9 +1,9 @@
-package com.ysh.wechat.message;
+package com.ysh.wechat.base.message;
 
+import com.ysh.wechat.base.resolver.YshClickEventResolver;
+import com.ysh.wechat.base.resolver.YshSubscribeEventResolver;
+import com.ysh.wechat.base.resolver.YshTextMessageResolver;
 import com.ysh.wechat.wxsdk.message.MessageRouter;
-import com.ysh.wechat.wxsdk.message.resolver.ClickEventResolver;
-import com.ysh.wechat.wxsdk.message.resolver.SubscribeEventResolver;
-import com.ysh.wechat.wxsdk.message.resolver.TextMessageResolver;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
@@ -15,16 +15,16 @@ import java.util.Map;
  * Created by yangshanghang on 2017/12/21...
  */
 @Component
-public class LpspMessageRouter extends MessageRouter {
+public class YshMessageRouter extends MessageRouter {
 
     /**
      * 消息转换器
      */
     private static Map<String, Class> routerMap = new HashMap<String, Class>() {
         {
-            put("eventsubscribe", SubscribeEventResolver.class);
-            put("text", TextMessageResolver.class);
-            put("eventclick",ClickEventResolver.class);
+            put("eventsubscribe", YshSubscribeEventResolver.class);
+            put("text", YshTextMessageResolver.class);
+            put("eventclick", YshClickEventResolver.class);
         }
     };
 

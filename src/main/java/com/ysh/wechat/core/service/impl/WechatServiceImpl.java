@@ -1,6 +1,6 @@
 package com.ysh.wechat.core.service.impl;
 
-import com.ysh.wechat.message.LpspMessageRouter;
+import com.ysh.wechat.base.message.YshMessageRouter;
 import com.ysh.wechat.common.constant.ConfigConstant;
 import com.ysh.wechat.wxsdk.common.utils.XMLUtils;
 import com.ysh.wechat.wxsdk.ticket.TicketManager;
@@ -38,7 +38,7 @@ public class WechatServiceImpl implements IWechatService {
      * 消息转换器
      */
     @Autowired
-    private LpspMessageRouter lpspMessageRouter;
+    private YshMessageRouter yshMessageRouter;
 
     /**
      * 处理消息
@@ -53,7 +53,7 @@ public class WechatServiceImpl implements IWechatService {
         // 调用parseXml方法解析请求消息
         Map<String, String> requestMap = XMLUtils.parseXml(request);
 
-        String message = lpspMessageRouter.route(requestMap,context);
+        String message = yshMessageRouter.route(requestMap,context);
 
         return message;
     }

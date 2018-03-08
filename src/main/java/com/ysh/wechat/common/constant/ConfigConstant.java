@@ -25,6 +25,11 @@ public class ConfigConstant {
      */
     public static String TOKEN_WECHAT;
 
+    /**
+     * 微信服务地址
+     */
+    public static String WECHAT_SERVER_URL;
+
     @Value("${appid.wechat}")
     public void setAppIdWechat(String appIdWechat) {
         APP_ID_WECHAT = appIdWechat;
@@ -38,5 +43,10 @@ public class ConfigConstant {
     @Value("${token.wechat}")
     public void setTokenWechat(String tokenWechat) {
         TOKEN_WECHAT = tokenWechat;
+    }
+
+    @Value(("${wechat.server.url}"))
+    public void setWechatServerUrl(String wechatServerUrl) {
+        WECHAT_SERVER_URL = wechatServerUrl;
     }
 }

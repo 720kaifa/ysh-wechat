@@ -16,6 +16,11 @@ public class BizConstant {
     public static final String TEST_BUTTON_KEY = "test_key";
 
     /**
+     * 客服图片按钮key
+     */
+    public static final String KF_IMAGE_BUTTON_KEY = "kf_image_key";
+
+    /**
      * 测试按钮KEY 点击回复文本内容
      */
     public static final String TEST_TEXT_MSG = "你点击了测试按钮，\n" +

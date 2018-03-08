@@ -28,9 +28,13 @@ public class MenuManagerTest extends AbstractJUnit4SpringContextTests {
         btn12.setName("测试回复");
         btn12.setKey("test_key");
 
+        ClickButton btn13 = new ClickButton();
+        btn13.setName("图片消息");
+        btn13.setKey("kf_image_key");
+
         ComplexButton btn1 = new ComplexButton();
         btn1.setName("菜单一");
-        btn1.setSub_button(new Button[]{btn11, btn12});
+        btn1.setSub_button(new Button[]{btn11, btn12, btn13});
 
 
         // 菜单二中的二级菜单
