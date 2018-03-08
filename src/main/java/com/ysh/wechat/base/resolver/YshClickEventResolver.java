@@ -1,6 +1,7 @@
 package com.ysh.wechat.base.resolver;
 
 import com.ysh.wechat.common.constant.BizConstant;
+import com.ysh.wechat.common.constant.ConfigConstant;
 import com.ysh.wechat.wxsdk.common.utils.XMLUtils;
 import com.ysh.wechat.wxsdk.message.bean.TextMessage;
 import com.ysh.wechat.wxsdk.message.resolver.ClickEventResolver;
@@ -26,18 +27,35 @@ public class YshClickEventResolver extends ClickEventResolver{
      */
     @Override
     public String resolve(HashMap<String, Object> message) throws Exception {
+        // 获取用户openId
+        String openId = message.get("FromUserName").toString();
+
         String eventKey= this.getEventKey(message);
         TextMessage textMessage = new TextMessage();
         this.setBaseMessage(textMessage, message);
         textMessage.setMsgType(MESSAGE_TEXT);
 
-
         // 服务介绍按钮点击事件
         if (eventKey.equals(BizConstant.TEST_BUTTON_KEY)) {
             textMessage.setContent(BizConstant.TEST_TEXT_MSG);
             return XMLUtils.parseXml(textMessage);
-        } else {
-            return "";
         }
+
+        // 客服图片按钮（测试）
+        if (eventKey.equals(BizConstant.KF_IMAGE_BUTTON_KEY)) {
+
+            StringBuffer sb = new StringBuffer();
+            sb.append("Welcome to there~\n\n")
+                    .append("<a href='")
+                    .append(ConfigConstant.WECHAT_SERVER_URL)
+                    .append("/send/kf/image?openId=")
+                    .append(openId+"&media_id=UeqrQhpekqN6eZI94AIiBwJu7bYRCoJUASvEl-nXgYU")
+                    .append("'>发送图片消息</a>");
+
+            textMessage.setContent(sb.toString());
+            return XMLUtils.parseXml(textMessage);
+        }
+
+        return "";
     }
 }
