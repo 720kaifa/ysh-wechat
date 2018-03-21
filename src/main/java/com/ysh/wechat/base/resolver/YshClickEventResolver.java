@@ -49,7 +49,7 @@ public class YshClickEventResolver extends ClickEventResolver{
                     .append("<a href='")
                     .append(ConfigConstant.WECHAT_SERVER_URL)
                     .append("/send/kf/image?openId=")
-                    .append(openId+"&media_id=UeqrQhpekqN6eZI94AIiBwJu7bYRCoJUASvEl-nXgYU")
+                    .append(openId+"&media_id=UeqrQhpekqN6eZI94AIiB_Rmiz9EnEh_373JTZfyObQ")
                     .append("'>发送图片消息</a>");
 
             textMessage.setContent(sb.toString());
